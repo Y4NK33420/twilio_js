@@ -1,9 +1,13 @@
+// filepath: /d:/gigs/Twilio 11Labs Agent/test-ngrok/yt/elevenlabs-twilio-ai-caller/twilio_js/index.js
 import Fastify from "fastify";
 import dotenv from "dotenv";
 import fastifyFormBody from "@fastify/formbody";
 import fastifyWs from "@fastify/websocket";
 import { registerInboundRoutes } from './inbound-calls.js';
 import { registerOutboundRoutes } from './outbound-calls.js';
+import path from 'path';
+import { fileURLToPath } from 'url';
+import fs from 'fs';
 
 // Load environment variables from .env file
 dotenv.config();
@@ -20,7 +24,11 @@ const PORT = process.env.PORT || 8000;
 
 // Root route for health check
 fastify.get("/", async (_, reply) => {
-  reply.send({ message: "Server is running" });
+  const __filename = fileURLToPath(import.meta.url);
+  const __dirname = path.dirname(__filename);
+  const filePath = path.join(__dirname, '../index.html');
+  const fileContent = fs.readFileSync(filePath, 'utf8');
+  reply.type('text/html').send(fileContent);
 });
 
 // Start the Fastify server
