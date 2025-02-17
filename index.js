@@ -4,7 +4,6 @@ import dotenv from "dotenv";
 import fastifyFormBody from "@fastify/formbody";
 import fastifyWs from "@fastify/websocket";
 import { registerInboundRoutes } from './inbound-calls.js';
-import { registerOutboundRoutes } from './outbound-calls.js';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import fs from 'fs';
@@ -36,7 +35,6 @@ const start = async () => {
   try {
     // Register route handlers
     await registerInboundRoutes(fastify);
-    await registerOutboundRoutes(fastify);
 
     // Start listening
     await fastify.listen({ port: PORT, host: '0.0.0.0' });
