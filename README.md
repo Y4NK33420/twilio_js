@@ -1,91 +1,161 @@
 # Stock Market API & AI Phone Agent
 
-This repository contains two integrated systems:
+This project integrates two systems:
 
-1. **Stock Market REST API** – A FastAPI backend for real-time stock prices, historical data, news sentiment, and market insights.
-2. **AI Phone Agent** – A Twilio-based phone system using ElevenLabs and OpenAI to handle live voice conversations.
+1. **Stock Market REST API** – A FastAPI backend for real-time stock prices, historical data, and market news.
+2. **AI Phone Agent** – A Node.js-based AI phone assistant using Twilio, ElevenLabs, and OpenAI to handle live voice conversations.
 
 ---
 
-## Stock Market API
+## 📈 Stock Market API
 
-### Overview
+A FastAPI-based REST API for fetching stock data, financial news, and performing market-related searches.
 
-A RESTful API built with FastAPI to provide:
+### 🔧 Project Structure
 
-- Real-time stock prices
-- Historical data
-- Market summaries
-- News sentiment and gainers/losers via Alpha Vantage
-- Market/news search via SerpAPI
-
-### Project Structure
-
-```
 11Labs_Stock/
 ├── api/
-│   ├── stock/
-│   └── search/
+│ ├── stock/
+│ │ ├── init.py
+│ │ ├── price.py
+│ │ ├── history.py
+│ │ ├── market_summary.py
+│ │ └── vantage.py
+│ └── search/
+│ ├── init.py
+│ └── search.py
 ├── main.py
 ├── requirements.txt
-├── .env / .env.example
-```
+├── .env
+└── .env.example
 
-### Key Endpoints
+markdown
+Copy
+Edit
 
-- `/api/stock/price`
-- `/api/stock/history`
-- `/api/stock/market-summary`
-- `/api/stock/vantage/news`
-- `/api/stock/vantage/market-movers`
-- `/api/search`
+### 💡 Core Components
 
-### Setup
+#### `main.py`
+- Initializes the FastAPI app
+- Sets up CORS middleware
+- Mounts routers
+- Hosts Swagger docs at `/docs`
 
-1. Copy `.env.example` to `.env` and add your API keys.
-2. Install dependencies: `pip install -r requirements.txt`
-3. Start server: `uvicorn main:app --reload`
-4. API Docs: `http://localhost:3000/docs`
+#### `api/stock/`
+- **price.py**: Real-time price endpoints
+- **history.py**: Historical time series data
+- **market_summary.py**: Market indices and summary
+- **vantage.py**: Alpha Vantage for news and market movers
 
----
+#### `api/search/`
+- Market/news search using SerpAPI
 
-## AI Phone Agent
+### 🔁 API Flow
 
-### Overview
+Client Request → FastAPI Router → Handler Module → External API → JSON Response
 
-A Node.js-based phone assistant that:
+markdown
+Copy
+Edit
 
-- Handles incoming Twilio calls
-- Uses ElevenLabs for voice synthesis
-- Uses OpenAI for conversation
-- Converts speech-to-text and responds with AI-generated audio
+### 🚀 Endpoints
 
-### Architecture
+- `GET /api/stock/price` – Real-time prices
+- `GET /api/stock/history` – Historical time series
+- `GET /api/stock/market-summary` – Market overview
+- `GET /api/stock/vantage/news` – News via Alpha Vantage
+- `GET /api/stock/vantage/market-movers` – Gainers/losers
+- `GET /api/search` – Market or news search
 
-```
-Caller → Twilio → Node.js Server → OpenAI / ElevenLabs
-```
+### ⚙️ Setup Instructions
 
-### Setup
+1. Copy `.env.example` → `.env`
+2. Add your keys:
+ALPHA_VANTAGE_API_KEY=your_key
+SERPAPI_API_KEY=your_key
 
-1. Clone: `git clone https://github.com/Y4NK33420/twilio_js`
-2. Install: `npm install`
-3. Configure `.env` with:
-   - TWILIO_ACCOUNT_SID
-   - TWILIO_AUTH_TOKEN
-   - ELEVENLABS_API_KEY
-   - OPENAI_API_KEY
-4. Start: `npm start`
+arduino
+Copy
+Edit
 
----
+3. Install and run:
+```bash
+pip install -r requirements.txt
+uvicorn main:app --reload
+Visit API docs: http://localhost:3000/docs
 
-## Integration Potential
+📞 AI Phone Agent
+A voice-enabled AI assistant that receives phone calls via Twilio and uses OpenAI and ElevenLabs to have live voice conversations.
 
-The Phone Agent can optionally call the Stock API to provide live stock information through voice. For example, "What's the price of TSLA?" can trigger a request to `/api/stock/price`.
+🧠 Features
+Receives and processes incoming phone calls
 
----
+Converts voice → text using Twilio
 
-## Repositories
+Sends text → OpenAI for response
 
-- Stock API: https://github.com/Y4NK33420/11Labs_Stock
-- Phone Agent: https://github.com/Y4NK33420/twilio_js
+Uses ElevenLabs to generate AI voice
+
+Optionally calls the Stock API for live data (e.g., “What’s the price of TSLA?”)
+
+⚙️ Architecture
+arduino
+Copy
+Edit
+Caller → Twilio → Node.js Server → OpenAI / ElevenLabs → AI Voice Reply
+📂 Repo & Setup
+Clone the agent from:
+
+👉 twilio_js GitHub Repository
+
+Then:
+
+Install dependencies:
+
+bash
+Copy
+Edit
+npm install
+Configure .env:
+
+ini
+Copy
+Edit
+TWILIO_ACCOUNT_SID=...
+TWILIO_AUTH_TOKEN=...
+OPENAI_API_KEY=...
+ELEVENLABS_API_KEY=...
+Start the server:
+
+bash
+Copy
+Edit
+npm start
+🔗 Integration Potential
+The AI Phone Agent can call the Stock Market API endpoints during a voice conversation to respond with live market data. For example:
+
+User: “What's the price of AAPL today?”
+
+AI: (fetches data from /api/stock/price and replies)
+
+📚 Related Repositories
+🔗 Stock API: 11Labs_Stock
+
+🔗 Phone Agent: twilio_js
+
+🛠️ Requirements
+Python 3.8+ (for API)
+
+Node.js 16+ (for phone agent)
+
+Accounts for:
+
+Alpha Vantage
+
+SerpAPI
+
+OpenAI
+
+ElevenLabs
+
+Twilio
