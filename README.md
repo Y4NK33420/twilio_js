@@ -50,7 +50,7 @@ Client Request → FastAPI Router → Module Handler → External API → JSON R
 
 ### 🚀 Endpoints
 
-* `GET /api/stock/price` – Real-time stock prices
+* `GET /api/stock/price` – Real-time stock prices .
 * `GET /api/stock/history` – Historical price data
 * `GET /api/stock/market-summary` – Major indices and summaries
 * `GET /api/stock/vantage/news` – News from Alpha Vantage
