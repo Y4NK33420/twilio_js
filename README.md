@@ -84,6 +84,12 @@ Client Request → FastAPI Router → Module Handler → External API → JSON R
 
 A voice-enabled AI assistant that interacts with users through phone calls, providing real-time answers using OpenAI, ElevenLabs, and optional stock data from the REST API.
 
+### 📘 End-to-End Call Flow Documentation
+
+For a first-time, detailed walkthrough of the complete runtime path (caller → Twilio → server → ElevenLabs agent → caller), including authentication, connections, and message payloads at each stage, see:
+
+* [`docs/call-flow.md`](docs/call-flow.md)
+
 ### 🧠 Features
 
 * Receives phone calls using **Twilio**
